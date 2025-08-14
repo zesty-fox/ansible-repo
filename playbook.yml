@@ -1,0 +1,6 @@
+---
+- name: Test ansible-pull playbook
+  hosts: local
+  become: yes
+  roles:
+    - test_role

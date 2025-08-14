@@ -1,0 +1,11 @@
+---
+- name: Print debug message
+  debug:
+    msg: "Hello from ansible-pull test role!"
+
+- name: Create a test file
+  copy:
+    src: hello.txt
+    dest: /tmp/hello_from_ansible_pull.txt
+    owner: "{{ ansible_user_id }}"
+    mode: '0644'
