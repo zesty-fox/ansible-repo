@@ -1,11 +1,10 @@
-- name: Install C/C++ extension
-    ansible.builtin.shell: "sudo -u day1 code --install-extension ms-vscode.cpptools"
-
-- name: Install Java extension pack
-    ansible.builtin.shell: "sudo -u day1 code --install-extension vscjava.vscode-java-pack"
-
-- name: Install Python extension
-    ansible.builtin.shell: "sudo -u day1 code --install-extension ms-python.python"
-
-- name: Install Code Runner extension
-    ansible.builtin.shell: "sudo -u day1 code --install-extension formulahendry.code-runner"
+- name: Ensure VS Code extensions are installed
+  ansible.builtin.command: "code --install-extension {{ item }}"
+  become_user: day1     # 指定以 'day1' 用户身份执行命令
+  loop:
+  - ms-vscode.cpptools
+  - vscjava.vscode-java-pack
+  - ms-python.python
+  - formulahendry.code-runner
+  changed_when: "'is already installed.' not in install_result.stdout"
+  register: install_result
