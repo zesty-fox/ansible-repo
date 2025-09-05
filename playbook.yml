@@ -1,6 +1,6 @@
 ---
 - name: Manage User Shells
-  hosts: your_servers
+  hosts: all
   become: yes  # 更改用户信息需要 root 权限
 
   tasks:
