@@ -6,3 +6,4 @@
 
   roles:
     - delete_home_dir
+    - day1
