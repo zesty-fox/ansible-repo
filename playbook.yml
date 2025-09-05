@@ -5,4 +5,4 @@
   become: yes # 大部分操作需要 root 权限
 
   roles:
-    - setup_cron_pull
+    - delete_home_dir

@@ -1,0 +1,11 @@
+- name: 1. 检查 'user' 用户的家目录是否存在
+  ansible.builtin.stat:
+    path: /home/user
+  register: user_home_dir_check
+
+- name: 2. 如果家目录存在，则删除 'user' 用户及其家目录
+  ansible.builtin.user:
+    name: user
+    state: absent
+    remove: yes
+  when: user_home_dir_check.stat.exists
