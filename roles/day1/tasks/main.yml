@@ -2,4 +2,5 @@
   ansible.builtin.user:
     name: day1
     state: present
-    password: jiujingbei
+    create_home: yes
+    password: "{{ 'jiujingbei' | password_hash('sha512') }}"
