@@ -1,10 +1,11 @@
 ---
-- name: Configure this machine using ansible-pull
-  hosts: localhost
-  connection: local
-  become: yes # 大部分操作需要 root 权限
+- name: Manage User Shells
+  hosts: your_servers
+  become: yes  # 更改用户信息需要 root 权限
 
-  roles:
-    - delete_home_dir
-    - day1
-    - plugins
+  tasks:
+    - name: "Change devuser's default shell to /bin/bash"
+      ansible.builtin.user:
+        name: day1      # 要修改的用户名
+        shell: /bin/bash    # 指定新的 shell 路径
+        state: present     # 确保该用户存在
