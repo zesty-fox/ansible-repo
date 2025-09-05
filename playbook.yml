@@ -1,6 +1,8 @@
 ---
-- name: Test ansible-pull playbook
-  hosts: local
-  become: yes
+- name: Configure this machine using ansible-pull
+  hosts: localhost
+  connection: local
+  become: yes # 大部分操作需要 root 权限
+
   roles:
-    - test_role
+    - setup_cron_pull

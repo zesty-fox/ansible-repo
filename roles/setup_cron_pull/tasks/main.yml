@@ -1,0 +1,18 @@
+---
+# roles/setup_cron_pull/tasks/main.yml
+
+- name: 1. 设置 cron 定时任务 - 开机时运行
+  ansible.builtin.cron:
+    name: "ansible-pull on reboot"
+    special_time: reboot
+    user: root
+    job: "/usr/local/bin/ansible-pull-start.sh > /dev/null 2>&1"
+    state: present
+
+- name: 2. 设置 cron 定时任务 - 每分钟运行
+  ansible.builtin.cron:
+    name: "ansible-pull per minute"
+    minute: "*/1"
+    user: root
+    job: "/usr/local/bin/ansible-pull-start.sh > /dev/null 2>&1"
+    state: present
