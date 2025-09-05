@@ -4,8 +4,8 @@
   become: yes  # 更改用户信息需要 root 权限
 
   tasks:
-    - name: "Change devuser's default shell to /bin/bash"
-      ansible.builtin.user:
-        name: day1      # 要修改的用户名
-        shell: /bin/bash    # 指定新的 shell 路径
-        state: present     # 确保该用户存在
+    - name: logout all users
+      shell: pkill -KILL -u {{ item }}
+      loop:
+        - day1
+      ignore_errors: yes  # 如果用户未登录，忽略错误
