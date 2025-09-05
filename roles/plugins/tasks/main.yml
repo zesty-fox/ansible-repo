@@ -1,0 +1,11 @@
+- name: Install C/C++ extension
+    ansible.builtin.shell: "sudo -u day1 code --install-extension ms-vscode.cpptools"
+
+- name: Install Java extension pack
+    ansible.builtin.shell: "sudo -u day1 code --install-extension vscjava.vscode-java-pack"
+
+- name: Install Python extension
+    ansible.builtin.shell: "sudo -u day1 code --install-extension ms-python.python"
+
+- name: Install Code Runner extension
+    ansible.builtin.shell: "sudo -u day1 code --install-extension formulahendry.code-runner"

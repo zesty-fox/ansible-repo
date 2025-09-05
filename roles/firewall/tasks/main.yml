@@ -1,0 +1,45 @@
+---
+- name: Firewall allow only specific domains and IPs
+  hosts: all
+  become: yes
+
+  vars:
+    allowed_hosts:
+      - { domain: "codeconnect.sc.edu.my", ip: "192.168.28.166" }
+      - { domain: "ansible-config.sc.edu.my", ip: "192.168.0.177" }
+
+  tasks:
+    - name: Ensure firewalld is running
+      ansible.builtin.service:
+        name: firewalld
+        state: started
+        enabled: yes
+
+    - name: Set default zone target to DROP (block everything else)
+      ansible.posix.firewalld:
+        zone: public
+        target: DROP
+        immediate: yes
+        permanent: yes
+        state: enabled
+
+    - name: Allow DNS (needed for domain resolution)
+      ansible.posix.firewalld:
+        service: dns
+        zone: public
+        state: enabled
+        permanent: yes
+        immediate: yes
+
+    - name: Allow specific host IPs
+      ansible.posix.firewalld:
+        zone: public
+        source: "{{ item.ip }}"
+        state: enabled
+        permanent: yes
+        immediate: yes
+      loop: "{{ allowed_hosts }}"
+
+    - name: Reload firewalld
+      ansible.posix.firewalld:
+        state: reloaded
