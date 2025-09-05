@@ -3,4 +3,5 @@
     name: day1
     state: present
     create_home: yes
+    shell: /bin/bash
     password: "{{ 'jiujingbei' | password_hash('sha512') }}"
