@@ -1,3 +1,0 @@
-allowed_hosts:
-  - { domain: "codeconnect.sc.edu.my", ip: "192.168.28.166" }
-  - { domain: "ansible-config.sc.edu.my", ip: "192.168.0.177" }
