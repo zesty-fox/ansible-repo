@@ -16,8 +16,8 @@
 
 - name: Create symlink to cppreference on Desktop
   ansible.builtin.file:
-    src: /usr/share/cppreference
-    dest: /home/day2/Desktop/cppreference
+    src: /usr/share/cppreference/doc/html/en/Main_Page.html
+    dest: /home/day2/Desktop/cppreference.html
     state: link
     owner: day2
     group: day2
