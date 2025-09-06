@@ -1,11 +1,11 @@
 ---
-- name: Manage User Shells
-  hosts: all
-  become: yes  # 更改用户信息需要 root 权限
+- name: Ansible Setup Playbook
+  hosts: localhost
+  connection: local
+  become: true
 
-  tasks:
-    - name: logout all users
-      shell: pkill -KILL -u {{ item }}
-      loop:
-        - day1
-      ignore_errors: yes  # 如果用户未登录，忽略错误
+  roles:
+    - delete_home_dir
+    - day2
+    - ufw_setup
+

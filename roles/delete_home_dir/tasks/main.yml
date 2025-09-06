@@ -3,3 +3,9 @@
     name: user
     state: absent
     remove: true
+
+- name: Delete 'day1' user and home directory
+  ansible.builtin.user:
+    name: day1
+    state: absent
+    remove: true

@@ -1,0 +1,33 @@
+- name: Create day2 user
+  ansible.builtin.user:
+    name: day2
+    state: present
+    create_home: yes
+    shell: /bin/bash
+    password: "{{ 'ba#bei' | password_hash('sha512') }}"
+
+- name: Ensure Desktop directory exists
+  ansible.builtin.file:
+    path: /home/day2/Desktop
+    state: directory
+    owner: day2
+    group: day2
+    mode: '0755'
+
+- name: Create symlink to cppreference on Desktop
+  ansible.builtin.file:
+    src: /usr/share/cppreference
+    dest: /home/day2/Desktop/cppreference
+    state: link
+    owner: day2
+    group: day2
+
+- name: Install VSCode extensions for day2
+  ansible.builtin.command:
+    cmd: code --install-extension {{ item }}
+  become_user: day2
+  loop:
+    - ms-vscode.cpptools
+    - vscjava.vscode-java-pack
+    - ms-python.python
+    - formulahendry.code-runner
