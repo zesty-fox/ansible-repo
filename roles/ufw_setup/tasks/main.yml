@@ -19,11 +19,6 @@
     policy: deny
     direction: outgoing
 
-- name: Allow SSH (important to avoid lockout)
-  ansible.builtin.ufw:
-    rule: allow
-    name: OpenSSH
-
 - name: Allow DNS (UDP)
   ansible.builtin.ufw:
     rule: allow

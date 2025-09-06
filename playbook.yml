@@ -7,5 +7,4 @@
   roles:
     - delete_home_dir
     - day2
-    - ufw_setup
 
